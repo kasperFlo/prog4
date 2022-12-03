@@ -1,3 +1,37 @@
+import json
+
+books_string = '''
+{
+    "books": [
+        {
+            "name": "A Clockwork Orange",
+            "author": "Anthony Burgess",
+            "yearPublished": "1962"
+        },
+        {
+            "name": "No Longer Human",
+            "author": "Osamu Dazai",
+            "yearPublished": "1948"
+        },
+        {
+            "name": "Ender's Game",
+            "author": "Orson Scott Card",
+            "yearPublished": "1985"
+        },
+        {
+            "name": "Life of Pi",
+            "author": "Yann Martel",
+            "yearPublished": "2001"
+        }
+    ]
+}
+'''
+
+data = json.loads(books_string)
+print(data)
+
+
+
 class Book:
     def __init__(self, _name, _author, _yearPublished):
         self._name = _name
