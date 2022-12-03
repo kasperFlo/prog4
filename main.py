@@ -36,23 +36,33 @@ def showMainMenu():
     print("\nVery well. Please select an option.\n(Create / Read / Update / Delete / Exit)\n")
     while True:
         crud = input("\u001b[90m> \u001b[0m").lower()
+        # Create
         if crud == "create" or crud == "c":
             print("\nVery well.\n")
+            #ask for name
+            #ask for author
+            #ask for year published
+            
+        # Read
         elif crud == "read" or crud == "r":
             print("\nVery well.\n")
+
+        # Update
         elif crud == "update" or crud == "u":
             print("\nVery well.\n")
+
+        # Delete
         elif crud == "delete" or crud == "del" or crud == "d":
             print("\nVery well.\n")
+
+        # Exit
         elif crud == "exit" or crud == "e":
             print("\nVery well.\n")
             quit()
         else:
             print("\nThat was not a valid option. Please try again\n(Create / Read / Update / Delete / Exit)\n")
 
-
 def run():
     showMainMenu()
-
 
 run()
