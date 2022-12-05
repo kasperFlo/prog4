@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 
 class Book:
     def __init__(self, _name, _author, _yearPublished):
@@ -38,7 +39,7 @@ def contains_numbers(string):
     return any(x.isdigit() for x in string)
 
 def showMainMenu():
-    print("\nPlease select an option.\n(Create / Read / Update / Delete / Exit)\n")
+    print("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
     while True:
         crud = input("\u001b[90m> \u001b[0m").lower()
         # CREATE
@@ -52,7 +53,7 @@ def showMainMenu():
                 with open ("resources.json", "r") as json_file:
                     data = json.load(json_file)
                     if check_value(data, bookName) == True:
-                        print("\n\u001b[31mThis book already exists in the Bing Chilling Library.\u001b[0m")
+                        print("\n\u001b[31mThis book alListy exists in the Bing Chilling Library.\u001b[0m")
                         showMainMenu()
                 if contains_letters(bookName):
                     break
@@ -84,29 +85,69 @@ def showMainMenu():
                 
             write_json(data)
             print("\n\u001b[32mYour book has been successfully added.\u001b[0m\n")
-            print("Please select an option.\n(Create / Read / Update / Delete / Exit)\n")
+            print("Please select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
 
-        # Read
-        elif crud == "read" or crud == "r":
+        # List
+        elif crud == "List" or crud == "l":
+            print("\nHere is a list of all books in the Bing Chilling Library:\n")
+            with open ("resources.json", "r") as json_file:
+                data = json.load(json_file)
+                pprint(data)
+            print("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
+        
+        # Search
+        elif crud == "search" or crud == "s" or crud == "serach":
             print("\nVery well.\n")
-
-            print("Please select an option.\n(Create / Read / Update / Delete / Exit)\n")
+            with open ("resources.json", "r") as json_file:
+                data = json.load(json_file)
+                try:
+                    bookName = input("\u001b[90mEnter the book's name: \u001b[0m").strip()
+                except: pass
+                if check_value(data, bookName) == True:
+                    # figure out update
+                    print("\nfigure out what to do here\n")
+                else:
+                    print("\n\u001b[31mSuch a book does not exist in the Bing Chilling Library\n\u001b[90m(double-check spelling, capitalization or other errors)\u001b[0m")
+                    showMainMenu()
+        
         # Update
         elif crud == "update" or crud == "u":
             print("\nVery well.\n")
+            with open ("resources.json", "r") as json_file:
+                data = json.load(json_file)
+                try:
+                    bookName = input("\u001b[90mEnter the book's name: \u001b[0m").strip()
+                except: pass
+                if check_value(data, bookName) == True:
+                    # figure out update
+                    print("\nfigure out what to do here\n")
+                else:
+                    print("\n\u001b[31mSuch a book does not exist in the Bing Chilling Library\n\u001b[90m(double-check spelling, capitalization or other errors)\u001b[0m")
+                    showMainMenu()
 
-            print("Please select an option.\n(Create / Read / Update / Delete / Exit)\n")
+            print("Please select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
         # Delete
         elif crud == "delete" or crud == "del" or crud == "d":
             print("\nVery well.\n")
+            with open ("resources.json", "r") as json_file:
+                data = json.load(json_file)
+                try:
+                    bookName = input("\u001b[90mEnter the book's name: \u001b[0m").strip()
+                except: pass
+                if check_value(data, bookName) == True:
+                    # figure out update
+                    print("\nfigure out what to do here\n")
+                else:
+                    print("\n\u001b[31mSuch a book does not exist in the Bing Chilling Library\n\u001b[90m(double-check spelling, capitalization or other errors)\u001b[0m")
+                    showMainMenu()
 
-            print("Please select an option.\n(Create / Read / Update / Delete / Exit)\n")
+            print("Please select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
         # Exit
         elif crud == "exit" or crud == "e":
             print("\nVery well.\n")
             quit()
         else:
-            print("\nThat was not a valid option. Please try again\n(Create / Read / Update / Delete / Exit)\n")
+            print("\nThat was not a valid option. Please try again\n(Create / List / Search / Update / Delete / Exit)\n")
 
 def run():
     print("\n\u001b[90m~\u001b[0m MAIN MENU\n\nYou have arrived at Bing Chilling Library. Would you like to enter?\n(yes / no)\n")
