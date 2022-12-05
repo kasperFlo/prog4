@@ -1,31 +1,6 @@
 import json
 from pprint import pprint
 
-# class related stuff is doing nothing in the program...
-class Book:
-    def __init__(self, _name, _author, _yearPublished):
-        self._name = _name
-        self._author = _author
-        self._yearPublished = _yearPublished
-
-    def getName(self):
-        return self._name
-
-    def setName(self, x):
-        self._name = x
-    
-    def getAuthor(self):
-        return self._author
-    
-    def setAuthor(self, x):
-        self._author = x
-    
-    def getYearPublished(self):
-        return self._yearPublished
-    
-    def setYearPublished(self, x):
-        self._yearPublished = x
-
 # function for writing to the file resources.json
 def write_json(data, filename="resources.json"):
     with open (filename, "w") as f:
@@ -111,9 +86,8 @@ def delete():
 
 # shows user the main menu options
 def showMainMenu():
-    print("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
     while True:
-        crud = input("\u001b[90m> \u001b[0m").lower()
+        crud = input("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n\n\n\u001b[90m> \u001b[0m").lower()
         # CREATE
         if crud == "create" or crud == "c":
             print("\nVery well.\n")
