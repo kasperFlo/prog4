@@ -1,1 +1,1 @@
-bookName != "" and 
+name
