@@ -1,6 +1,7 @@
 import json
 from pprint import pprint
 
+# class related stuff is doing nothing in the program...
 class Book:
     def __init__(self, _name, _author, _yearPublished):
         self._name = _name
@@ -25,6 +26,7 @@ class Book:
     def setYearPublished(self, x):
         self._yearPublished = x
 
+# function for writing to resources.json
 def write_json(data, filename="resources.json"):
     with open (filename, "w") as f:
         json.dump(data, f, indent=4)
@@ -75,7 +77,7 @@ def create():
         data = json.load(json_file)
         temp = data["books"]
         createdBook = {"name": bookName, "author": bookAuthor, "yearPublished": bookYear}
-        temp.append(createdBook)     
+        temp.append(createdBook)
     write_json(data)
     print("\n\u001b[32mYour book has been successfully added.\u001b[0m\n")
     print("Please select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
