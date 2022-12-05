@@ -26,20 +26,30 @@ class Book:
     def setYearPublished(self, x):
         self._yearPublished = x
 
-# function for writing to resources.json
+# function for writing to the file resources.json
 def write_json(data, filename="resources.json"):
     with open (filename, "w") as f:
         json.dump(data, f, indent=4)
 
-def check_value(data, value):
+# checks if a book with the same name (value) already exists inside of the json file
+def check_identical_value(data, value):
     return any(book['name'] == value for book in data['books'])
 
+# searches for a book in the json file given its name and then prettyprints it
+def search(data, name):
+    for book in data['books']:
+        if book['name'] == name:
+            pprint(book)
+
+# checks if a string contains alphabet characters
 def contains_letters(string):
     return any(x.isalpha() for x in string)
 
+# checks if a string contains numeric characters
 def contains_numbers(string):
     return any(x.isdigit() for x in string)
 
+# prompts user to add a book to the json file
 def create():
 # input validation for name, author, year published
     while True:
@@ -48,8 +58,8 @@ def create():
         except: pass
         with open ("resources.json", "r") as json_file:
             data = json.load(json_file)
-            if check_value(data, bookName) == True:
-                print("\n\u001b[31mThis book alListy exists in the Bing Chilling Library.\u001b[0m")
+            if check_identical_value(data, bookName) == True:
+                print("\n\u001b[31mThis book name already exists in the Bing Chilling Library.\u001b[0m")
                 showMainMenu()
         if contains_letters(bookName):
             break
@@ -82,6 +92,8 @@ def create():
     print("\n\u001b[32mYour book has been successfully added.\u001b[0m\n")
     print("Please select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
 
+### NOT DONE ###
+# prompts user to enter a book to be deleted from the json file
 def delete():
     with open ("resources.json", "r") as json_file:
         data = json.load(json_file)
@@ -89,7 +101,7 @@ def delete():
         try:
             bookName = input("\u001b[90mEnter the book's name: \u001b[0m").strip()
         except: pass
-        if check_value(data, bookName) == True:
+        if check_identical_value(data, bookName) == True:
             # figure out how to DELETE
             print("\nthat book exists\n")
         else:
@@ -97,6 +109,7 @@ def delete():
             showMainMenu()
         print("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
 
+# shows user the main menu options
 def showMainMenu():
     print("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
     while True:
@@ -122,9 +135,11 @@ def showMainMenu():
                 try:
                     bookName = input("\u001b[90mEnter the book's name: \u001b[0m").strip()
                 except: pass
-                if check_value(data, bookName) == True:
+                if check_identical_value(data, bookName) == True:
                     # figure out search
-                    print("\nfigure out what to do here\n")
+                    print("\n\u001b[32mWe found the following book:\u001b[0m\n")
+                    search(data, bookName)
+                    print("\nPlease select an option.\n(Create / List / Search / Update / Delete / Exit)\n")
                 else:
                     print("\n\u001b[31mSuch a book does not exist in the Bing Chilling Library\n\u001b[90m(double-check spelling, capitalization or other errors)\u001b[0m")
                     showMainMenu()
@@ -138,7 +153,7 @@ def showMainMenu():
                     bookName = input("\u001b[90mEnter the book's name: \u001b[0m").strip()
                 except: pass
                 # figure out DELETE and then throw create
-                if check_value(data, bookName) == True:
+                if check_identical_value(data, bookName) == True:
                     # DELETE
                     # create()
                     print("\nfigure out what to do here\n")
@@ -158,6 +173,7 @@ def showMainMenu():
         else:
             print("\nThat was not a valid option. Please try again\n(Create / List / Search / Update / Delete / Exit)\n")
 
+# starts program and asks user if they want to continue
 def run():
     print("\n\u001b[90m~\u001b[0m MAIN MENU\n\nYou have arrived at Bing Chilling Library. Would you like to enter?\n(yes / no)\n")
     while True:
@@ -165,7 +181,7 @@ def run():
         if cont == "yes" or cont == "y":
             break
         elif cont == "no" or cont == "n":
-            print("\nPlease add the following information.\n")
+            print("\nHave a nice day.\n")
             quit()
         else:
             print("\nThat was not a valid option. Please try again\n(yes / no)\n")
